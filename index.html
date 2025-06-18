@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Karissa – Web Designer</title>
+  <meta name="description" content="Portfolio of Karissa. Modern, creative, and responsive web design services.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin:0; padding:0; min-height:100vh; background:#1a2333;}
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      background: #1a2333;
+    }
+    /* Paint splash image background */
+    .paint-bg-img {
+      position: fixed;
+      z-index: 0;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #1a2333 url('https://i.ibb.co/BVpk0KMn/pngtree-abstract-wallpaper-background-made-of-of-paint-splashes-image-15686388.jpg') no-repeat center center;
+      background-size: cover;
+      filter: blur(0px) brightness(0.65) saturate(1.25);
+      pointer-events: none;
+      transition: filter 0.5s;
+    }
+    /* Overlay for readability */
+    .bg-overlay {
+      position: fixed;
+      z-index: 1;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(120deg, rgba(15,22,38,0.72) 55%, rgba(32,40,80,0.28) 100%);
+      pointer-events: none;
+    }
+
+    /* SPLASH PAGE STYLES */
+    .splash-page {
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: #1a2333 url('https://i.ibb.co/BVpk0KMn/pngtree-abstract-wallpaper-background-made-of-of-paint-splashes-image-15686388.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.7s cubic-bezier(.7,.2,.2,1);
+    }
+    .splash-page.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .splash-content {
+      background: rgba(20, 28, 48, 0.70);
+      padding: 3rem 2rem 2.5rem 2rem;
+      border-radius: 1.7rem;
+      box-shadow: 0 10px 40px #111c;
+      text-align: center;
+      min-width: 320px;
+      max-width: 90vw;
+      animation: fadeInSplash 0.7s cubic-bezier(.76,-0.07,.2,1.21);
+    }
+    @keyframes fadeInSplash {
+      0% { opacity: 0; transform: scale(0.85);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    .splash-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      color: #fff;
+      font-size: 3rem;
+      letter-spacing: 0.11em;
+      text-shadow: 0 8px 40px #2b72ea99, 0 1px 0 #1a2333;
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      transform: scale(0.7) translateY(40px);
+      animation: splashTitleIn 1.1s cubic-bezier(.7, -0.15, .22, 1.4) 0.3s forwards;
+    }
+    .splash-tagline {
+      font-size: 1.2rem;
+      color: #b3b3c6;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      margin-bottom: 2.3rem;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeInTagline 0.7s 1.1s forwards;
+    }
+    @keyframes fadeInTagline {
+      from { opacity: 0;}
+      to   { opacity: 1;}
+    }
+    .splash-enter-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.13rem;
+      color: #fff;
+      background: linear-gradient(90deg, #2b72ea 20%, #e5a31a 90%);
+      box-shadow: 0 4px 32px #2b72ea66;
+      border: none;
+      border-radius: 8px;
+      padding: 1rem 2.6rem;
+      cursor: pointer;
+      transition: box-shadow 0.22s, background 0.18s, transform 0.11s;
+      position: relative;
+      overflow: hidden;
+      outline: none;
+    }
+    .splash-enter-btn:hover, .splash-enter-btn:focus {
+      box-shadow: 0 6px 48px #e5a31a99;
+      background: linear-gradient(90deg, #e5a31a 0%, #2b72ea 100%);
+      color: #fff;
+      transform: scale(1.05);
+    }
+    @media (max-width: 520px) {
+      .splash-title { font-size: 2.1rem;}
+      .splash-page { min-width: 0; }
+      .splash-content { min-width: 0; padding: 2.2rem 0.7rem 1.5rem 0.7rem;}
+    }
+
+    nav {
+      z-index: 10;
+      background: rgba(22, 27, 41, 0.93);
+      box-shadow: 0 2px 22px #1117;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5vw 1.1rem 1.5vw;
+      position: sticky;
+      top:0;
+      border-bottom: 2.3px solid #2b72ea;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+    }
+    .brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.45rem;
+      color: #2b72ea;
+      letter-spacing: 1.2px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-left: 2.6rem;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      font-size: 1.11rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 7px;
+      transition: background 0.22s, color 0.17s;
+      position: relative;
+    }
+    .nav-links a.active, .nav-links a:hover {
+      background: #2b72ea;
+      color: #fff;
+    }
+    .nav-admin {
+      background: #232b4a;
+      border-radius: 50%;
+      padding: 0.37rem 0.47rem;
+      margin-left: 1.1rem;
+      color: #2b72ea;
+      font-size: 1.12rem;
+      border: 1.3px solid #2b72ea88;
+      box-shadow: 0 3px 10px #2b72ea33;
+      cursor: pointer;
+      transition: background 0.18s, color 0.14s, box-shadow 0.14s;
+      outline: none;
+    }
+    .nav-admin:hover, .nav-admin:focus {
+      background: #2b72ea;
+      color: #fff;
+      box-shadow: 0 6px 20px #2b72ea44;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 0.2rem;
+      background: #232b4a;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px #2b72ea11;
+      padding: 0.25rem 0.55rem;
+      margin-right: 0.7rem;
+    }
+    .lang-switch button {
+      background: none;
+      border: none;
+      color: #2b72ea;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0.19rem 0.57rem;
+      border-radius: 6px;
+      transition: background 0.17s, color 0.12s;
+    }
+    .lang-switch button.active, .lang-switch button:hover {
+      background: #2b72ea;
+      color: #fff;
+    }
+    @media (max-width: 650px) {
+      nav { flex-direction: column; align-items: flex-start; gap: 0.7rem; }
+      .nav-right { margin-top: 0.6rem; }
+      .nav-links { margin-left: 0.3rem; flex-wrap: wrap; gap: 0.5rem; }
+    }
+    /* Home content */
+    .main-content {
+      z-index: 2;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 80vh;
+      padding-top: 6rem;
+      padding-bottom: 3.5rem;
+      justify-content: center;
+    }
+    .hero {
+      background: rgba(22,27,41,0.90);
+      padding: 3.3rem 2.3rem 2.6rem 2.3rem;
+      border-radius: 22px;
+      box-shadow: 0 6px 48px #000c;
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #2b72ea;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      opacity: 0;
+      transform: scale(0.7) translateY(40px);
+      animation: splashTitleIn 1.1s cubic-bezier(.7, -0.15, .22, 1.4) 0.4s forwards;
+      text-shadow: 0 6px 36px #2b72ea55;
+    }
+    @keyframes splashTitleIn {
+      0% { opacity: 0; filter: blur(18px); transform: scale(0.7) translateY(40px);}
+      70% { opacity: 1; filter: blur(0); transform: scale(1.13) translateY(-8px);}
+      86% { transform: scale(.97) translateY(2px);}
+      100% { opacity: 1; filter: blur(0); transform: scale(1) translateY(0);}
+    }
+    .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.34rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 1.3rem;
+      letter-spacing: 0.2px;
+    }
+    .hero p { color: #b3b3c6; font-size: 1.13rem; margin: 1.1rem 0 2.1rem 0;}
+    .hero .cta-btn {
+      background: #2b72ea;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.13rem;
+      font-weight: 600;
+      padding: 0.88rem 2.1rem;
+      margin-top: 1.2rem;
+      box-shadow: 0 4px 24px #2b72ea44;
+      cursor: pointer;
+      transition: background 0.18s, color 0.14s;
+    }
+    .hero .cta-btn:hover { background: #e5a31a; color: #2b72ea;}
+    /* Copyright label */
+    .copyright-label {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      z-index: 110;
+      color: #b3b3c6;
+      font-size: 0.98rem;
+      background: rgba(22,27,41,0.85);
+      padding: 8px 18px 10px 24px;
+      border-top-left-radius: 12px;
+      box-shadow: 0 0 10px #0007;
+      letter-spacing: 0.02em;
+      user-select: none;
+      pointer-events: none;
+    }
+    @media (max-width: 470px) {
+      .hero { padding: 1.2rem 0.4rem; }
+      .hero h1 { font-size: 1.28rem; }
+      .hero h2 { font-size: 1.03rem; }
+      .copyright-label {
+        font-size: 0.93rem;
+        padding: 6px 10px 8px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Splash Page -->
+  <div class="splash-page" id="splashPage">
+    <div class="splash-content">
+      <div class="splash-title">Karissa</div>
+      <div class="splash-tagline">Web Designer &amp; Code Magician</div>
+      <button class="splash-enter-btn" id="splashEnterBtn">Enter</button>
+    </div>
+  </div>
+
+  <!-- Paint splash image background -->
+  <div class="paint-bg-img"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      <span class="brand"><i class="fa-solid fa-brush"></i> Karissa</span>
+      <div class="nav-links">
+        <a href="index.html" class="active" data-i18n="nav_home">Home</a>
+        <a href="about.html" data-i18n="nav_about">About Me</a>
+        <a href="portfolio.html" data-i18n="nav_portfolio">Portfolio</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+        <button class="nav-admin" id="admin-cog" title="Admin"><i class="fa fa-cog"></i></button>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="pl">PL</button>
+        <button data-lang="es">ES</button>
+        <button data-lang="ua">UA</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <div class="main-content">
+    <div class="hero">
+      <h1 data-i18n="hero_title">Hey, I'm Karissa!</h1>
+      <h2 data-i18n="hero_sub">Web Designer & Code Magician</h2>
+      <p data-i18n="hero_desc">I create playful, beautiful, and responsive websites that wow your audience and grow your brand.</p>
+      <button class="cta-btn" onclick="window.location.href='portfolio.html'" data-i18n="hero_cta">See My Work</button>
+    </div>
+  </div>
+
+  <!-- Copyright Label -->
+  <div class="copyright-label">© Hultgka 2025</div>
+
+  <!-- Firebase (placeholder for future pages) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBTI1OAozQfC_7RWblZ3qtiP03y0O4hOpc",
+      authDomain: "karissa-s-portfolio.firebaseapp.com",
+      projectId: "karissa-s-portfolio",
+      storageBucket: "karissa-s-portfolio.appspot.com",
+      messagingSenderId: "91280590936",
+      appId: "1:91280590936:web:13b904b7843a97e221622d"
+    };
+    const app = initializeApp(firebaseConfig);
+  </script>
+  <script>
+    // Splash Page logic
+    window.addEventListener('DOMContentLoaded', function() {
+      const splash = document.getElementById('splashPage');
+      const enterBtn = document.getElementById('splashEnterBtn');
+
+      // Optional: Only show splash on first page load (not after navigation)
+      if (window.sessionStorage.getItem('splashSeen')) {
+        splash.classList.add('hide');
+        setTimeout(() => splash.style.display = 'none', 800);
+      }
+
+      enterBtn.addEventListener('click', function() {
+        splash.classList.add('hide');
+        window.sessionStorage.setItem('splashSeen', '1');
+        setTimeout(() => splash.style.display = 'none', 800);
+      });
+    });
+
+    // Multilanguage support
+    const translations = {
+      en: {
+        nav_home: "Home",
+        nav_about: "About Me",
+        nav_portfolio: "Portfolio",
+        nav_contact: "Contact",
+        hero_title: "Hey, I'm Karissa!",
+        hero_sub: "Web Designer & Code Magician",
+        hero_desc: "I create playful, beautiful, and responsive websites that wow your audience and grow your brand.",
+        hero_cta: "See My Work"
+      },
+      pl: {
+        nav_home: "Start",
+        nav_about: "O mnie",
+        nav_portfolio: "Portfolio",
+        nav_contact: "Kontakt",
+        hero_title: "Cześć, jestem Karissa!",
+        hero_sub: "Web Designer & Czarodziejka Kodowania",
+        hero_desc: "Tworzę zabawne, piękne i responsywne strony, które zachwycają Twoich odbiorców i rozwijają Twój biznes.",
+        hero_cta: "Zobacz moje prace"
+      },
+      es: {
+        nav_home: "Inicio",
+        nav_about: "Sobre mí",
+        nav_portfolio: "Portafolio",
+        nav_contact: "Contacto",
+        hero_title: "¡Hola, soy Karissa!",
+        hero_sub: "Diseñadora web & maga del código",
+        hero_desc: "Creo sitios web divertidos, hermosos y responsivos que sorprenden a tu audiencia y hacen crecer tu marca.",
+        hero_cta: "Ver mi trabajo"
+      },
+      ua: {
+        nav_home: "Головна",
+        nav_about: "Про мене",
+        nav_portfolio: "Портфоліо",
+        nav_contact: "Контакт",
+        hero_title: "Привіт, я Карісса!",
+        hero_sub: "Веб-дизайнерка & магія коду",
+        hero_desc: "Я створюю веселі, красиві та адаптивні сайти, які вражають вашу аудиторію й розвивають бренд.",
+        hero_cta: "Дивитись роботи"
+      }
+    };
+    let currentLang = "en";
+    function setLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        let val = translations[lang][key];
+        if (val) {
+          if (el.tagName === "P" || el.tagName === "H2") el.innerHTML = val;
+          else el.textContent = val;
+        }
+      });
+      document.querySelectorAll(".lang-switch button").forEach(btn=>{
+        btn.classList.toggle("active", btn.getAttribute("data-lang")===lang);
+      });
+    }
+    document.querySelectorAll(".lang-switch button").forEach(btn=>{
+      btn.onclick = ()=>setLang(btn.getAttribute("data-lang"));
+    });
+    setLang("en");
+  </script>
+</body>
+</html>
