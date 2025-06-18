@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    /* ... your existing CSS ... */
     html, body { margin:0; padding:0; min-height:100vh; background:#1a2333;}
     body {
       font-family: 'Roboto', sans-serif;
@@ -157,7 +156,7 @@
       .portfolio-grid { grid-template-columns: 1fr; gap: 2rem 0.5rem; }
     }
     .portfolio-card {
-      background: rgba(22,27,41,0.88);
+      background: rgba(22,27,41,0.91);
       border-radius: 18px;
       box-shadow: 0 6px 32px #000a;
       overflow: hidden;
@@ -166,63 +165,62 @@
       transition: transform 0.17s, box-shadow 0.2s;
       cursor: pointer;
       position: relative;
-      min-height: 350px;
-    }
-    .portfolio-card:hover {
-      transform: translateY(-5px) scale(1.025);
-      box-shadow: 0 12px 36px #2b72ea33;
-    }
-    .portfolio-card-img {
+      min-height: 450px;
       width: 100%;
-      height: 215px;
-      background: #232b4a;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+      max-width: 100%;
+      padding: 0;
     }
-    .portfolio-card-img img {
+    .portfolio-card-media {
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      position: relative;
+      background: #181e2f;
+      overflow: hidden;
+      display: block;
+    }
+    .portfolio-card-media img,
+    .portfolio-card-media iframe {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+      border: none;
       display: block;
+      background: #181e2f;
       transition: transform 0.28s;
     }
-    .portfolio-card:hover .portfolio-card-img img {
-      transform: scale(1.07);
-    }
-    .portfolio-card-body {
-      padding: 1.13rem 1.35rem 1.0rem 1.35rem;
+    .portfolio-card-content {
       display: flex;
       flex-direction: column;
-      flex: 1;
-      justify-content: flex-start;
+      justify-content: space-between;
+      min-height: 210px;
+      padding: 1.2rem 1.5rem 1.3rem 1.5rem;
+      flex: 1 1 0;
     }
     .portfolio-card-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
-      font-size: 1.21rem;
-      margin-bottom: 0.39rem;
+      font-size: 1.18rem;
       color: #2b72ea;
       letter-spacing: 0.5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      margin-bottom: 0.2em;
+      margin-top: 0.2em;
     }
     .portfolio-card-desc {
-      font-size: 1.01rem;
+      font-size: 1.03rem;
       color: #e2e9ff;
-      margin-bottom: 1.1rem;
-      flex: 1;
-      min-height: 44px;
+      margin-bottom: 0.35rem;
+      min-height: 32px;
     }
     .portfolio-card-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.38rem;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.3rem;
+      min-height: 26px;
     }
     .portfolio-tag {
       background: #2b72ea33;
@@ -232,24 +230,28 @@
       font-size: 0.91em;
       font-weight: 600;
       margin-right: 0.2em;
+      box-shadow: 0 2px 8px #181e2fa7;
     }
     .portfolio-card-links {
       display: flex;
       gap: 1.1rem;
-      margin-top: 0.5rem;
+      margin-top: 0.1rem;
       align-items: center;
+      flex-wrap: wrap;
+      min-height: 40px;
     }
     .portfolio-card-links a {
       color: #fff;
       text-decoration: none;
       background: #2b72ea;
-      padding: 0.33rem 0.85rem;
+      padding: 0.29rem 0.75rem;
       border-radius: 7px;
-      font-size: 0.98rem;
+      font-size: 0.93rem;
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
       transition: background 0.18s, color 0.14s;
       display: flex; align-items: center; gap:0.45em;
+      box-shadow: 0 2px 8px #181e2fa7;
     }
     .portfolio-card-links a:hover {
       background: #fff;
@@ -264,24 +266,31 @@
       color: #111a;
     }
     .portfolio-card-morebtn {
+      margin-top: 1.5rem;
       background: #e5a31a;
       color: #232b4a;
       border: none;
       border-radius: 7px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.98rem;
-      font-weight: 600;
-      padding: 0.36rem 1.15rem;
-      box-shadow: 0 3px 12px #2b72ea22;
+      font-size: 1.01rem;
+      font-weight: 700;
+      padding: 0.38rem 1.18rem;
+      box-shadow: 0 4px 16px #2b72ea33;
       cursor: pointer;
-      margin-left: auto;
-      margin-top: 0.5rem;
       transition: background 0.18s, color 0.14s;
+      pointer-events: auto;
+      align-self: flex-end;
     }
     .portfolio-card-morebtn:hover {
       background: #2b72ea;
       color: #fff;
     }
+    @media (max-width: 650px) {
+      .portfolio-card-content {padding: 1rem 0.8rem 1.1rem 0.8rem;}
+      .portfolio-card-morebtn { margin-top: 0.7rem; }
+    }
+
+    /* --- MODAL --- */
     .modal-backdrop {
       position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.65); z-index:9998;
       display: none; align-items: center; justify-content: center;
@@ -289,19 +298,20 @@
     .modal-backdrop.active { display: flex; }
     .portfolio-modal {
       background: #202a3d;
-      padding: 2rem 2rem 1.5rem 2rem;
-      border-radius: 22px;
+      padding: 2.5rem 2.5rem 2.0rem 2.5rem;
+      border-radius: 28px;
       box-shadow: 0 8px 48px #000d;
-      min-width: 320px;
-      max-width: 95vw;
+      min-width: 340px;
+      max-width: 98vw;
       color: #fff;
       position: relative;
       z-index: 9999;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      align-items: center;
+      gap: 1.35rem;
       animation: fadeInModal 0.6s;
-      max-height: 80vh;
+      max-height: 92vh;
       overflow-y: auto;
     }
     @keyframes fadeInModal {
@@ -312,37 +322,68 @@
       background: #232b4a; color: #ccc; padding: 0.33rem 0.9rem; border-radius: 7px; margin-left: auto; margin-bottom: 1rem;
       font-size:1.2rem; border: none; cursor: pointer;
       transition: background 0.16s, color 0.12s;
+      display: block;
     }
     .portfolio-modal .close-modal:hover { background:#2b72ea; color:#fff;}
-    .portfolio-modal-img {
-      width: 100%; max-width: 380px;
-      margin: 0 auto 1rem auto;
-      border-radius: 17px;
+    .portfolio-modal-media {
+      width: 100%;
+      max-width: 1000px;
+      aspect-ratio: 16/9;
+      margin: 0 auto 0.7rem auto;
+      border-radius: 28px;
+      background: #181e2f;
       box-shadow: 0 3px 16px #2b72ea44;
       display: block;
+      overflow: hidden;
+      position: relative;
+      min-height: 0;
+    }
+    .portfolio-modal-media img,
+    .portfolio-modal-media iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      object-position: center;
+      border: none;
+      display: block;
+      background: #181e2f;
+      border-radius: 28px;
     }
     .portfolio-modal-title {
-      font-size: 1.27rem;
+      font-size: 1.34rem;
       font-family: 'Montserrat',sans-serif;
       font-weight: 700;
       color: #2b72ea;
-      margin-bottom: 0.35em;
-    }
-    .portfolio-modal-desc {
-      font-size: 1.09rem;
-      color: #e2e9ff;
-      line-height: 1.68;
-      margin-bottom: 0.4em;
+      margin-bottom: 0.25em;
+      text-align: left;
+      width: 100%;
+      max-width: 1000px;
     }
     .portfolio-modal-tags {
-      margin-bottom: 1.2em;
+      margin-bottom: 0.5em;
+      width: 100%;
+      max-width: 1000px;
+      text-align: left;
+    }
+    .portfolio-modal-desc {
+      font-size: 1.10rem;
+      color: #e2e9ff;
+      line-height: 1.68;
+      margin-bottom: 0.7em;
+      width: 100%;
+      max-width: 1000px;
+      text-align: left;
     }
     .portfolio-modal-links {
       display: flex;
       gap: 1.13em;
       margin-top: 0.7em;
       flex-wrap: wrap;
+      width: 100%;
+      max-width: 1000px;
+      text-align: left;
     }
     .portfolio-modal-links a {
       color: #fff;
@@ -366,66 +407,6 @@
       background: #fff;
       color: #2b72ea;
     }
-    .admin-modal {
-      background: #202a3d;
-      padding: 2rem 2rem 1.5rem 2rem;
-      border-radius: 22px;
-      box-shadow: 0 8px 48px #000d;
-      min-width: 320px;
-      max-width: 95vw;
-      color: #fff;
-      position: relative;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      animation: fadeInModal 0.6s;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-    .admin-modal h2 { font-family:'Montserrat',sans-serif; font-size:1.3rem; margin-top:0;}
-    .admin-modal label { font-weight:500; margin-bottom:0.25rem; display:block;}
-    .admin-modal input[type="file"] { margin-top:0.4rem;}
-    .admin-modal input[type="text"], .admin-modal textarea, .admin-modal input[type="url"], .admin-modal select {
-      width: 100%; border-radius: 7px; border: none; padding:0.6rem 0.8rem; font-size:1rem; margin-bottom:0.7rem;
-      font-family:'Roboto',sans-serif; background:#22304e; color:#fff;
-    }
-    .admin-modal textarea {min-height: 60px;resize:vertical;}
-    .admin-modal .admin-btn-row { display: flex; gap:1rem; margin-top:1rem;}
-    .admin-modal button {
-      font-family:'Montserrat',sans-serif; font-weight:600; font-size:1rem; border-radius:7px; border:none; padding:0.55rem 1.25rem; cursor:pointer;
-      background:#2b72ea; color:#fff; box-shadow:0 2px 8px #2b72ea44; transition:background 0.14s;
-    }
-    .admin-modal button:hover { background:#e5a31a; color:#2b72ea;}
-    .admin-modal .close-modal {
-      background: #232b4a; color: #ccc; padding: 0.33rem 0.9rem; border-radius: 7px; margin-left: auto; margin-bottom: 1rem;
-      font-size:1.2rem; border: none; cursor: pointer;
-      transition: background 0.16s, color 0.12s;
-    }
-    .admin-modal .close-modal:hover { background:#2b72ea; color:#fff;}
-    .admin-modal .admin-section {margin-bottom: 1.4rem;}
-    .admin-modal .admin-section:last-child {margin-bottom: 0;}
-    .admin-modal .admin-delete { background:#e23434 !important; color:#fff !important; margin-left:0.7rem;}
-    .admin-project-list {margin:0.6rem 0 0.4rem 0; padding:0; list-style:none;}
-    .admin-project-list li {margin-bottom:0.37rem; background:#22304e; border-radius:5px; padding:0.55rem 0.7rem;}
-    .admin-project-list li span {font-weight:600;}
-    .admin-lang-label {
-      display: inline-block;
-      font-size: 1.06em;
-      font-weight: 600;
-      background: #233059;
-      color: #fff;
-      border-radius: 7px;
-      padding: 0.18em 0.75em;
-      margin-right: 0.5em;
-      margin-bottom: 0.4em;
-    }
-    .pw-modal { display:flex; flex-direction:column; align-items:center;}
-    .pw-modal input[type="password"] {
-      width: 200px; border-radius: 7px; border:none; padding:0.55rem 0.8rem; font-size:1rem; margin:1.1rem 0 0.7rem 0;
-      font-family:'Roboto',sans-serif; background:#22304e; color:#fff;
-    }
-    .pw-modal .admin-btn-row {margin-top: 0;}
     .copyright-label {
       position: fixed;
       bottom: 0;
@@ -483,22 +464,23 @@
       let projects = [
         {
           id: "_demo_",
-          imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+          imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1250&q=80",
           title_en: "Modern Portfolio Demo",
-          title_pl: "Nowoczesne Portfolio Demo",
-          title_es: "Portafolio Moderno Demo",
-          title_ua: "Сучасне Портфоліо Демо",
-          shortDesc_en: "A sample project card with image, languages, and links.",
-          shortDesc_pl: "Przykładowa karta projektu z obrazem, językami i linkami.",
-          shortDesc_es: "Una tarjeta de proyecto de ejemplo con imagen, idiomas y enlaces.",
-          shortDesc_ua: "Зразкова картка проекту з зображенням, мовами та посиланнями.",
+          shortDesc_en: "A sample project card with image, languages, tags, links, and a longer demo description.",
           fullDesc_en: "This is a demo project entry, showing how your portfolio cards will look. You can edit, delete, or add your own real projects via the admin panel (click the cog in the navbar).",
-          fullDesc_pl: "To jest przykładowy wpis projektu, pokazujący, jak będą wyglądać Twoje karty portfolio. Możesz edytować, usuwać lub dodać własne projekty przez panel admina (ikona zębatki).",
-          fullDesc_es: "Este es un proyecto de demostración que muestra cómo se verán tus tarjetas de portafolio. Puedes editar, eliminar o agregar tus propios proyectos desde el panel de administración (icono de engranaje).",
-          fullDesc_ua: "Це демо-проект, який показує, як виглядатимуть ваші картки портфоліо. Ви можете редагувати, видаляти або додавати власні проекти через панель адміністратора (значок шестерні).",
           siteUrl: "https://example.com/",
           githubUrl: "https://github.com/",
           tags: ["HTML", "CSS", "Demo", "Responsive"]
+        },
+        {
+          id: "test",
+          imageUrl: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1250&q=80",
+          title_en: "Test Project",
+          shortDesc_en: "A real project card, now with all the same visual elements as the demo! Add more details to your description for a richer presentation.",
+          fullDesc_en: "Here is a full, detailed project description like in the demo. It explains what the project does, its features, and technologies.",
+          siteUrl: "https://yoursite.com",
+          githubUrl: "https://github.com/yourrepo",
+          tags: ["HTML", "CSS", "Fun"]
         }
       ];
       let modalBackdrop = document.getElementById('modal-backdrop');
@@ -540,28 +522,72 @@
       document.querySelectorAll(".lang-switch button").forEach(btn=>{
         btn.onclick = ()=>setLang(btn.getAttribute("data-lang"));
       });
+
+      function isEmbeddable(url) {
+        if (!url) return false;
+        return (
+          url.includes("youtube.com/watch?v=") ||
+          url.includes("youtu.be/") ||
+          url.includes("figma.com/file/") ||
+          url.includes("codepen.io/") ||
+          url.includes("codesandbox.io/") ||
+          url.includes("jsfiddle.net/")
+        );
+      }
+      function getEmbedHTML(url, height = 100) {
+        if (!url) return "";
+        if (url.includes("youtube.com/watch?v=")) {
+          const vid = url.split("v=")[1].split("&")[0];
+          return `<iframe width="100%" height="${height}" src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen style="background:#181e2f;border-radius:18px;"></iframe>`;
+        }
+        if (url.includes("youtu.be/")) {
+          const vid = url.split("youtu.be/")[1].split("?")[0];
+          return `<iframe width="100%" height="${height}" src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen style="background:#181e2f;border-radius:18px;"></iframe>`;
+        }
+        if (url.includes("figma.com/file/")) {
+          return `<iframe style="border: none; border-radius:18px;" width="100%" height="${height}" src="https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(url)}" allowfullscreen></iframe>`;
+        }
+        if (url.includes("codepen.io/")) {
+          return `<iframe height="${height}" style="width:100%;border-radius:18px;" scrolling="no" title="CodePen Embed" src="${url.replace('/pen/', '/embed/').replace('/full/', '/embed/')}?default-tab=result" frameborder="no" allowfullscreen></iframe>`;
+        }
+        if (url.includes("codesandbox.io/")) {
+          return `<iframe src="${url.replace('/s/', '/embed/').replace('/embed/', '/embed/')}?fontsize=14&hidenavigation=1&theme=dark" style="width:100%;height:${height}px;border:0;border-radius:18px;overflow:hidden;background:#181e2f;" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"></iframe>`;
+        }
+        if (url.includes("jsfiddle.net/")) {
+          let bare = url.split('?')[0];
+          if (!bare.endsWith('/embedded/')) bare += 'embedded/';
+          return `<iframe width="100%" height="${height}" src="${bare}" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0" style="border-radius:18px;background:#181e2f;"></iframe>`;
+        }
+        return "";
+      }
+
       function renderPortfolioGrid() {
         const grid = document.getElementById('portfolio-grid');
         grid.innerHTML = '';
-        let toShow = projects; // <-- DEMO project is now included!
+        let toShow = projects;
         toShow.forEach((proj, idx) => {
           let langSuffix = "_" + currentLang;
           function getField(f) {
             return proj[f+langSuffix] || proj[f+"_en"] || "";
           }
           let tagsHtml = (proj.tags || []).map(tag => `<span class="portfolio-tag">${tag}</span>`).join('');
-          let imgUrl = proj.imageUrl || 'https://placehold.co/400x300?text=No+Image';
+          let imgUrl = proj.imageUrl || '';
           let card = document.createElement('div');
           card.className = 'portfolio-card';
+          let embedHTML = isEmbeddable(imgUrl)
+            ? `<div class="portfolio-card-media">${getEmbedHTML(imgUrl, 210)}</div>`
+            : `<div class="portfolio-card-media"><img src="${imgUrl||'https://placehold.co/800x450?text=No+Image'}" alt="Project Image"></div>`;
           card.innerHTML = `
-            <div class="portfolio-card-img"><img src="${imgUrl}" alt="Project Image"></div>
-            <div class="portfolio-card-body">
-              <div class="portfolio-card-title">${getField("title")}</div>
-              <div class="portfolio-card-desc">${getField("shortDesc")}</div>
-              <div class="portfolio-card-tags">${tagsHtml}</div>
-              <div class="portfolio-card-links">
-                ${proj.siteUrl ? `<a href="${proj.siteUrl}" target="_blank" rel="noopener"><i class="fa fa-globe"></i> ${t('live_site')}</a>` : ""}
-                ${proj.githubUrl ? `<a class="github" href="${proj.githubUrl}" target="_blank" rel="noopener"><i class="fab fa-github"></i> ${t('github')}</a>` : ""}
+            ${embedHTML}
+            <div class="portfolio-card-content">
+              <div>
+                <div class="portfolio-card-title">${getField("title")}</div>
+                <div class="portfolio-card-desc">${getField("shortDesc")}</div>
+                <div class="portfolio-card-tags">${tagsHtml}</div>
+                <div class="portfolio-card-links">
+                  ${proj.siteUrl ? `<a href="${proj.siteUrl}" target="_blank" rel="noopener"><i class="fa fa-globe"></i> ${t('live_site')}</a>` : ""}
+                  ${proj.githubUrl ? `<a class="github" href="${proj.githubUrl}" target="_blank" rel="noopener"><i class="fab fa-github"></i> ${t('github')}</a>` : ""}
+                </div>
               </div>
               <button class="portfolio-card-morebtn" data-idx="${projects.findIndex(p=>p.id === proj.id)}">${t('view_more')}</button>
             </div>
@@ -583,10 +609,16 @@
           return proj[f+langSuffix] || proj[f+"_en"] || "";
         }
         let tagsHtml = (proj.tags || []).map(tag => `<span class="portfolio-tag">${tag}</span>`).join('');
-        let imgUrl = proj.imageUrl || 'https://placehold.co/400x300?text=No+Image';
+        let imgUrl = proj.imageUrl || '';
+        let embedHTML;
+        if (isEmbeddable(imgUrl)) {
+          embedHTML = `<div class="portfolio-modal-media">${getEmbedHTML(imgUrl, 560)}</div>`;
+        } else {
+          embedHTML = `<div class="portfolio-modal-media"><img src="${imgUrl||'https://placehold.co/800x450?text=No+Image'}" alt="Project Image"></div>`;
+        }
         portfolioModal.innerHTML = `
           <button class="close-modal" title="Close">&times;</button>
-          <img class="portfolio-modal-img" src="${imgUrl}" alt="Project Image"/>
+          ${embedHTML}
           <div class="portfolio-modal-title">${getField("title")}</div>
           <div class="portfolio-modal-tags">${tagsHtml}</div>
           <div class="portfolio-modal-desc">${getField("fullDesc")}</div>
@@ -653,7 +685,6 @@
 
         function renderAdminPanel(editIdx) {
           if (editIdx === undefined) {
-            // Project list view - now includes DEMO project!
             let projectsList = projects.map((proj) => {
               let idx = projects.findIndex(p => p.id === proj.id);
               let title = proj.title_en || proj.title_pl || proj.title_es || proj.title_ua || "Untitled";
@@ -694,7 +725,6 @@
               renderAdminPanel(-1);
             };
           } else {
-            // Add/Edit form
             let proj = editIdx === -1 ? {} : { ...projects[editIdx] };
             let isEdit = editIdx !== -1;
             let langFields = '';
@@ -713,12 +743,14 @@
               <button class="close-modal" title="Close">&times;</button>
               <h2>${isEdit ? "Edit Project" : "Add Project"}</h2>
               <div class="admin-section">
-                <label>Project Image (Paste direct URL, e.g. https://imgur.com/xyz.png)</label>
+                <label>Project Image or Embed Link
+                  <span style="font-weight:400;color:#aac">(<b>Image URL</b> or <b>YouTube/Figma/CodePen</b> etc. link)</span>
+                </label>
                 <div style="display:flex;align-items:center;gap:1rem;">
-                  <div class="portfolio-card-img" style="width:140px;height:100px;">
-                    <img src="${proj.imageUrl||'https://placehold.co/400x300?text=No+Image'}" id="admin-project-img" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"/>
+                  <div class="portfolio-card-media" style="width:140px;aspect-ratio:16/9;">
+                    <div id="admin-embed-preview"></div>
                   </div>
-                  <input type="text" id="img-url-input" placeholder="Paste image URL" value="${proj.imageUrl||""}" style="width:300px;">
+                  <input type="text" id="img-url-input" placeholder="Paste image or embed URL" value="${proj.imageUrl||""}" style="width:300px;">
                 </div>
               </div>
               <div class="admin-section">
@@ -738,11 +770,16 @@
                 <button class="close-modal">Cancel</button>
               </div>
             `, 'admin');
+            function updateEmbedPreview(url) {
+              document.getElementById('admin-embed-preview').innerHTML =
+                (isEmbeddable(url) ? getEmbedHTML(url, 90) : `<img src="${url||'https://placehold.co/400x300?text=No+Image'}" style="width:100%;height:100%;object-fit:cover;border-radius:18px;background:#181e2f;"/>`);
+            }
+            updateEmbedPreview(proj.imageUrl||"");
             adminModal.querySelector('.close-modal').onclick = () => renderAdminPanel();
             adminModal.querySelector('#img-url-input').oninput = function(e) {
               const url = e.target.value;
               proj.imageUrl = url;
-              adminModal.querySelector('#admin-project-img').src = url || 'https://placehold.co/400x300?text=No+Image';
+              updateEmbedPreview(url);
             };
             adminModal.querySelector('#save-admin').onclick = async function() {
               adminModal.querySelectorAll('[data-field]').forEach(el => {
