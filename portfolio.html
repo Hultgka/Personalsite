@@ -9,418 +9,270 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <style>
     html, body { margin:0; padding:0; min-height:100vh; background:#1a2333;}
-    body {
-      font-family: 'Roboto', sans-serif;
-      color: #fff;
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-      background: #1a2333;
-    }
-    .paint-bg-img {
-      position: fixed;
-      z-index: 0;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: #1a2333 url('https://i.ibb.co/BVpk0KMn/pngtree-abstract-wallpaper-background-made-of-of-paint-splashes-image-15686388.jpg') no-repeat center center;
-      background-size: cover;
-      filter: blur(0px) brightness(0.65) saturate(1.25);
-      pointer-events: none;
-      transition: filter 0.5s;
-    }
-    .bg-overlay {
-      position: fixed; z-index: 1; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: linear-gradient(120deg, rgba(15,22,38,0.72) 55%, rgba(32,40,80,0.28) 100%);
-      pointer-events: none;
-    }
-    nav {
-      z-index: 10;
-      background: rgba(22, 27, 41, 0.93);
-      box-shadow: 0 2px 22px #1117;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.1rem 2.5vw 1.1rem 1.5vw;
-      position: sticky;
-      top:0;
-      border-bottom: 2.3px solid #2b72ea;
-    }
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 1.8rem;
-    }
-    .brand {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.45rem;
-      color: #2b72ea;
-      letter-spacing: 1.2px;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .nav-links {
-      display: flex;
-      gap: 1.2rem;
-      margin-left: 2.6rem;
-    }
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-      font-size: 1.11rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 7px;
-      transition: background 0.22s, color 0.17s;
-      position: relative;
-    }
-    .nav-links a.active, .nav-links a:hover {
-      background: #2b72ea;
-      color: #fff;
-    }
-    .nav-admin {
-      background: #232b4a;
-      border-radius: 50%;
-      padding: 0.37rem 0.47rem;
-      margin-left: 1.1rem;
-      color: #2b72ea;
-      font-size: 1.12rem;
-      border: 1.3px solid #2b72ea88;
-      box-shadow: 0 3px 10px #2b72ea33;
-      cursor: pointer;
-      transition: background 0.18s, color 0.14s, box-shadow 0.14s;
-      outline: none;
-    }
-    .nav-admin:hover, .nav-admin:focus {
-      background: #2b72ea;
-      color: #fff;
-      box-shadow: 0 6px 20px #2b72ea44;
-    }
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-    }
-    .lang-switch {
-      display: flex;
-      gap: 0.2rem;
-      background: #232b4a;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px #2b72ea11;
-      padding: 0.25rem 0.55rem;
-      margin-right: 0.7rem;
-    }
-    .lang-switch button {
-      background: none;
-      border: none;
-      color: #2b72ea;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      padding: 0.19rem 0.57rem;
-      border-radius: 6px;
-      transition: background 0.17s, color 0.12s;
-    }
-    .lang-switch button.active, .lang-switch button:hover {
-      background: #2b72ea;
-      color: #fff;
-    }
-    @media (max-width: 650px) {
-      nav { flex-direction: column; align-items: flex-start; gap: 0.7rem; }
-      .nav-right { margin-top: 0.6rem; }
-      .nav-links { margin-left: 0.3rem; flex-wrap: wrap; gap: 0.5rem; }
-    }
-    .portfolio-main-content {
-      z-index: 2;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 70vh;
-      padding-top: 6rem;
-      padding-bottom: 3.5rem;
-      justify-content: center;
-    }
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2.6rem 2.1rem;
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    @media (max-width: 900px) {
-      .portfolio-grid { grid-template-columns: 1fr; gap: 2rem 0.5rem; }
-    }
-    .portfolio-card {
-      background: rgba(22,27,41,0.91);
-      border-radius: 18px;
-      box-shadow: 0 6px 32px #000a;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.17s, box-shadow 0.2s;
-      cursor: pointer;
-      position: relative;
-      min-height: 450px;
-      width: 100%;
-      max-width: 100%;
-      padding: 0;
-    }
-    .portfolio-card-media {
-      width: 100%;
-      height: 0;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      position: relative;
-      background: #181e2f;
-      overflow: hidden;
-      display: block;
-    }
-    .portfolio-card-media img,
-    .portfolio-card-media iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      border: none;
-      display: block;
-      background: #181e2f;
-      transition: transform 0.28s;
-    }
-    .portfolio-card-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 210px;
-      padding: 1.2rem 1.5rem 1.3rem 1.5rem;
-      flex: 1 1 0;
-    }
-    .portfolio-card-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 1.18rem;
-      color: #2b72ea;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.2em;
-      margin-top: 0.2em;
-    }
-    .portfolio-card-desc {
-      font-size: 1.03rem;
-      color: #e2e9ff;
-      margin-bottom: 0.35rem;
-      min-height: 32px;
-    }
-    .portfolio-card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.38rem;
-      margin-bottom: 0.3rem;
-      min-height: 26px;
-    }
-    .portfolio-tag {
-      background: #2b72ea33;
-      color: #2b72ea;
-      border-radius: 7px;
-      padding: 0.14rem 0.75rem;
-      font-size: 0.91em;
-      font-weight: 600;
-      margin-right: 0.2em;
-      box-shadow: 0 2px 8px #181e2fa7;
-    }
-    .portfolio-card-links {
-      display: flex;
-      gap: 1.1rem;
-      margin-top: 0.1rem;
-      align-items: center;
-      flex-wrap: wrap;
-      min-height: 40px;
-    }
-    .portfolio-card-links a {
-      color: #fff;
-      text-decoration: none;
-      background: #2b72ea;
-      padding: 0.29rem 0.75rem;
-      border-radius: 7px;
-      font-size: 0.93rem;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 500;
-      transition: background 0.18s, color 0.14s;
-      display: flex; align-items: center; gap:0.45em;
-      box-shadow: 0 2px 8px #181e2fa7;
-    }
-    .portfolio-card-links a:hover {
-      background: #fff;
-      color: #2b72ea;
-    }
-    .portfolio-card-links a.github {
-      background: #232b4a;
-      color: #2b72ea;
-    }
-    .portfolio-card-links a.github:hover {
-      background: #fff;
-      color: #111a;
-    }
-    .portfolio-card-morebtn {
-      margin-top: 1.5rem;
-      background: #e5a31a;
-      color: #232b4a;
-      border: none;
-      border-radius: 7px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.01rem;
-      font-weight: 700;
-      padding: 0.38rem 1.18rem;
-      box-shadow: 0 4px 16px #2b72ea33;
-      cursor: pointer;
-      transition: background 0.18s, color 0.14s;
-      pointer-events: auto;
-      align-self: flex-end;
-    }
-    .portfolio-card-morebtn:hover {
-      background: #2b72ea;
-      color: #fff;
-    }
-    @media (max-width: 650px) {
-      .portfolio-card-content {padding: 1rem 0.8rem 1.1rem 0.8rem;}
-      .portfolio-card-morebtn { margin-top: 0.7rem; }
-    }
-
+    body { font-family: 'Roboto', sans-serif; color: #fff; min-height: 100vh; position: relative; overflow-x: hidden; background: #1a2333; }
+    .paint-bg-img { position: fixed; z-index: 0; top: 0; left: 0; width: 100vw; height: 100vh; background: #1a2333 url('https://i.ibb.co/BVpk0KMn/pngtree-abstract-wallpaper-background-made-of-of-paint-splashes-image-15686388.jpg') no-repeat center center; background-size: cover; filter: blur(0px) brightness(0.65) saturate(1.25); pointer-events: none; transition: filter 0.5s; }
+    .bg-overlay { position: fixed; z-index: 1; top: 0; left: 0; width: 100vw; height: 100vh; background: linear-gradient(120deg, rgba(15,22,38,0.72) 55%, rgba(32,40,80,0.28) 100%); pointer-events: none; }
+    nav { z-index: 10; background: rgba(22, 27, 41, 0.93); box-shadow: 0 2px 22px #1117; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5vw 1.1rem 1.5vw; position: sticky; top:0; border-bottom: 2.3px solid #2b72ea; }
+    .nav-left { display: flex; align-items: center; gap: 1.8rem; }
+    .brand { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.45rem; color: #2b72ea; letter-spacing: 1.2px; display: flex; align-items: center; gap: 0.6rem; }
+    .nav-links { display: flex; gap: 1.2rem; margin-left: 2.6rem; }
+    .nav-links a { color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 500; letter-spacing: 0.2px; font-size: 1.11rem; padding: 0.25rem 0.7rem; border-radius: 7px; transition: background 0.22s, color 0.17s; position: relative; }
+    .nav-links a.active, .nav-links a:hover { background: #2b72ea; color: #fff; }
+    .nav-admin { background: #232b4a; border-radius: 50%; padding: 0.37rem 0.47rem; margin-left: 1.1rem; color: #2b72ea; font-size: 1.12rem; border: 1.3px solid #2b72ea88; box-shadow: 0 3px 10px #2b72ea33; cursor: pointer; transition: background 0.18s, color 0.14s, box-shadow 0.14s; outline: none; }
+    .nav-admin:hover, .nav-admin:focus { background: #2b72ea; color: #fff; box-shadow: 0 6px 20px #2b72ea44; }
+    .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+    .lang-switch { display: flex; gap: 0.2rem; background: #232b4a; border-radius: 12px; box-shadow: 0 2px 10px #2b72ea11; padding: 0.25rem 0.55rem; margin-right: 0.7rem; }
+    .lang-switch button { background: none; border: none; color: #2b72ea; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 1rem; cursor: pointer; padding: 0.19rem 0.57rem; border-radius: 6px; transition: background 0.17s, color 0.12s; }
+    .lang-switch button.active, .lang-switch button:hover { background: #2b72ea; color: #fff; }
+    @media (max-width: 650px) { nav { flex-direction: column; align-items: flex-start; gap: 0.7rem; } .nav-right { margin-top: 0.6rem; } .nav-links { margin-left: 0.3rem; flex-wrap: wrap; gap: 0.5rem; } }
+    .portfolio-main-content { z-index: 2; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 70vh; padding-top: 6rem; padding-bottom: 3.5rem; justify-content: center; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.6rem 2.1rem; width: 100%; max-width: 1000px; margin: 0 auto; }
+    @media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr; gap: 2rem 0.5rem; } }
+    .portfolio-card { background: rgba(22,27,41,0.91); border-radius: 18px; box-shadow: 0 6px 32px #000a; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.17s, box-shadow 0.2s; cursor: pointer; position: relative; min-height: 450px; width: 100%; max-width: 100%; padding: 0; }
+    .portfolio-card-media { width: 100%; height: 0; padding-bottom: 56.25%; position: relative; background: #181e2f; overflow: hidden; display: block; }
+    .portfolio-card-media img, .portfolio-card-media iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; border: none; display: block; background: #181e2f; transition: transform 0.28s; }
+    .portfolio-card-content { display: flex; flex-direction: column; justify-content: space-between; min-height: 210px; padding: 1.2rem 1.5rem 1.3rem 1.5rem; flex: 1 1 0; }
+    .portfolio-card-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.18rem; color: #2b72ea; letter-spacing: 0.5px; margin-bottom: 0.2em; margin-top: 0.2em; }
+    .portfolio-card-desc { font-size: 1.03rem; color: #e2e9ff; margin-bottom: 0.35rem; min-height: 32px; }
+    .portfolio-card-tags { display: flex; flex-wrap: wrap; gap: 0.38rem; margin-bottom: 0.3rem; min-height: 26px; }
+    .portfolio-tag { background: #2b72ea33; color: #2b72ea; border-radius: 7px; padding: 0.14rem 0.75rem; font-size: 0.91em; font-weight: 600; margin-right: 0.2em; box-shadow: 0 2px 8px #181e2fa7; }
+    .portfolio-card-links { display: flex; gap: 1.1rem; margin-top: 0.1rem; align-items: center; flex-wrap: wrap; min-height: 40px; }
+    .portfolio-card-links a { color: #fff; text-decoration: none; background: #2b72ea; padding: 0.29rem 0.75rem; border-radius: 7px; font-size: 0.93rem; font-family: 'Montserrat', sans-serif; font-weight: 500; transition: background 0.18s, color 0.14s; display: flex; align-items: center; gap:0.45em; box-shadow: 0 2px 8px #181e2fa7; }
+    .portfolio-card-links a:hover { background: #fff; color: #2b72ea; }
+    .portfolio-card-links a.github { background: #232b4a; color: #2b72ea; }
+    .portfolio-card-links a.github:hover { background: #fff; color: #111a; }
+    .portfolio-card-morebtn { margin-top: 1.5rem; background: #e5a31a; color: #232b4a; border: none; border-radius: 7px; font-family: 'Montserrat', sans-serif; font-size: 1.01rem; font-weight: 700; padding: 0.38rem 1.18rem; box-shadow: 0 4px 16px #2b72ea33; cursor: pointer; transition: background 0.18s, color 0.14s; pointer-events: auto; align-self: flex-end; }
+    .portfolio-card-morebtn:hover { background: #2b72ea; color: #fff; }
+    @media (max-width: 650px) { .portfolio-card-content {padding: 1rem 0.8rem 1.1rem 0.8rem;} .portfolio-card-morebtn { margin-top: 0.7rem; } }
     /* --- MODAL --- */
-    .modal-backdrop {
-      position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.65); z-index:9998;
-      display: none; align-items: center; justify-content: center;
-    }
+    .modal-backdrop { position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.65); z-index:9998; display: none; align-items: center; justify-content: center; }
     .modal-backdrop.active { display: flex; }
-    .portfolio-modal {
-      background: #202a3d;
-      padding: 2.5rem 2.5rem 2.0rem 2.5rem;
-      border-radius: 28px;
-      box-shadow: 0 8px 48px #000d;
-      min-width: 340px;
-      max-width: 98vw;
+    .portfolio-modal { background: #202a3d; padding: 2.5rem 2.5rem 2.0rem 2.5rem; border-radius: 28px; box-shadow: 0 8px 48px #000d; min-width: 340px; max-width: 98vw; color: #fff; position: relative; z-index: 9999; display: flex; flex-direction: column; align-items: center; gap: 1.35rem; animation: fadeInModal 0.6s; max-height: 92vh; overflow-y: auto; }
+    @keyframes fadeInModal { from { opacity: 0; transform: scale(0.85);} to   { opacity: 1; transform: scale(1);} }
+    .portfolio-modal .close-modal { background: #232b4a; color: #ccc; padding: 0.33rem 0.9rem; border-radius: 7px; margin-left: auto; margin-bottom: 1rem; font-size:1.2rem; border: none; cursor: pointer; transition: background 0.16s, color 0.12s; display: block; }
+    .portfolio-modal .close-modal:hover { background:#2b72ea; color:#fff;}
+    .portfolio-modal-media { width: 100%; max-width: 1000px; aspect-ratio: 16/9; margin: 0 auto 0.7rem auto; border-radius: 28px; background: #181e2f; box-shadow: 0 3px 16px #2b72ea44; display: block; overflow: hidden; position: relative; min-height: 0; }
+    .portfolio-modal-media img, .portfolio-modal-media iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; border: none; display: block; background: #181e2f; border-radius: 28px; }
+    .portfolio-modal-title { font-size: 1.34rem; font-family: 'Montserrat',sans-serif; font-weight: 700; color: #2b72ea; margin-bottom: 0.25em; text-align: left; width: 100%; max-width: 1000px; }
+    .portfolio-modal-tags { margin-bottom: 0.5em; width: 100%; max-width: 1000px; text-align: left; }
+    .portfolio-modal-desc { font-size: 1.10rem; color: #e2e9ff; line-height: 1.68; margin-bottom: 0.7em; width: 100%; max-width: 1000px; text-align: left; }
+    .portfolio-modal-links { display: flex; gap: 1.13em; margin-top: 0.7em; flex-wrap: wrap; width: 100%; max-width: 1000px; text-align: left; }
+    .portfolio-modal-links a { color: #fff; text-decoration: none; background: #2b72ea; padding: 0.39rem 1em; border-radius: 7px; font-size: 1.01rem; font-family: 'Montserrat', sans-serif; font-weight: 600; display: flex; align-items: center; gap:0.48em; transition: background 0.18s, color 0.14s; }
+    .portfolio-modal-links a.github { background: #232b4a; color: #2b72ea; }
+    .portfolio-modal-links a:hover, .portfolio-modal-links a.github:hover { background: #fff; color: #2b72ea; }
+    .copyright-label { position: fixed; bottom: 0; right: 0; z-index: 110; color: #b3b3c6; font-size: 0.98rem; background: rgba(22,27,41,0.85); padding: 8px 18px 10px 24px; border-top-left-radius: 12px; box-shadow: 0 0 10px #0007; letter-spacing: 0.02em; user-select: none; pointer-events: none; }
+    /* --- ADMIN PANEL VERTICAL, MOBILE-FRIENDLY --- */
+    .admin-modal {
+      background: #232c45;
+      border-radius: 24px;
+      padding: 2rem 1.3rem 1.5rem 1.3rem;
+      box-shadow: 0 10px 60px #000c;
+      width: 100%;
+      max-width: 540px;
       color: #fff;
       position: relative;
       z-index: 9999;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 1.35rem;
+      align-items: stretch;
+      gap: 1.1rem;
       animation: fadeInModal 0.6s;
-      max-height: 92vh;
+      max-height: 96vh;
       overflow-y: auto;
+      font-size: 1.07em;
     }
-    @keyframes fadeInModal {
-      from { opacity: 0; transform: scale(0.85);}
-      to   { opacity: 1; transform: scale(1);}
+    .admin-modal h2 {
+      margin: 0 0 .8em 0;
+      color: #ffda76;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.02em;
+      font-weight: 700;
+      padding-bottom: .3em;
+      border-bottom: 1.5px solid #2b72ea44;
     }
-    .portfolio-modal .close-modal {
-      background: #232b4a; color: #ccc; padding: 0.33rem 0.9rem; border-radius: 7px; margin-left: auto; margin-bottom: 1rem;
-      font-size:1.2rem; border: none; cursor: pointer;
-      transition: background 0.16s, color 0.12s;
+    .admin-modal label {
+      font-weight: 600;
+      color: #a1cdf2;
+      margin: .55em 0 .17em 0;
       display: block;
+      font-size: 1.04em;
     }
-    .portfolio-modal .close-modal:hover { background:#2b72ea; color:#fff;}
-    .portfolio-modal-media {
+    .admin-modal input[type="text"],
+    .admin-modal input[type="url"],
+    .admin-modal textarea {
       width: 100%;
-      max-width: 1000px;
-      aspect-ratio: 16/9;
-      margin: 0 auto 0.7rem auto;
-      border-radius: 28px;
-      background: #181e2f;
-      box-shadow: 0 3px 16px #2b72ea44;
-      display: block;
-      overflow: hidden;
-      position: relative;
-      min-height: 0;
+      background: #28354d;
+      color: #fff;
+      border: 1.5px solid #2b72ea88;
+      border-radius: 7px;
+      padding: .52em .7em;
+      margin: .11em 0 .7em 0;
+      font-size: 1.06em;
+      font-family: inherit;
+      resize: vertical;
+      transition: border .18s, background .18s;
+      box-sizing: border-box;
     }
-    .portfolio-modal-media img,
-    .portfolio-modal-media iframe {
-      position: absolute;
-      top: 0; left: 0;
+    .admin-modal input[type="text"]:focus,
+    .admin-modal input[type="url"]:focus,
+    .admin-modal textarea:focus {
+      outline: none;
+      border-color: #2b72ea;
+      background: #31416a;
+    }
+    .admin-modal textarea {
+      min-height: 40px;
+      max-height: 150px;
+    }
+    .admin-section {
+      margin: 1.1em 0;
+      background: #222c46;
+      padding: 1.1em .7em .45em .7em;
+      border-radius: 11px;
+      box-shadow: 0 3px 18px #1a223777;
+    }
+    .admin-lang-label {
+      font-size: .97em;
+      color: #2b72ea;
+      font-weight: bold;
+      margin: 0 0 5px 0;
+      display: block;
+      letter-spacing: .03em;
+    }
+    .admin-btn-row {
+      display: flex;
+      gap: 1.1em;
+      margin-top: .7em;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+    .admin-btn-row button, .admin-modal button.close-modal {
+      background: #e5a31a;
+      color: #232b4a;
+      border: none;
+      border-radius: 7px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.07rem;
+      font-weight: 700;
+      padding: 0.36rem 1.1rem;
+      box-shadow: 0 4px 16px #2b72ea33;
+      cursor: pointer;
+      transition: background 0.18s, color 0.14s;
+      outline: none;
+    }
+    .admin-btn-row button:hover,
+    .admin-modal button.close-modal:hover {
+      background: #2b72ea;
+      color: #fff;
+    }
+    .admin-modal button.close-modal {
+      margin-left: auto;
+      margin-bottom: 1.2em;
+      padding: .33rem .95rem;
+      background: #232b4a;
+      color: #ccc;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.15rem;
+      font-family: 'Montserrat', sans-serif;
+      box-shadow: none;
+      transition: background 0.18s, color 0.14s;
+      align-self: flex-end;
+    }
+    .admin-modal .close-modal:hover { background: #2b72ea; color:#fff;}
+    .admin-project-list {
+      list-style: none;
+      padding: 0;
+      margin: .2em 0 .5em 0;
+    }
+    .admin-project-list li {
+      padding: .6em 0;
+      display: flex;
+      gap: 1.2em;
+      align-items: center;
+      border-bottom: 1px solid #2b72ea33;
+      font-size: 1.07em;
+      transition: background .12s;
+      word-break: break-word;
+    }
+    .admin-project-list li:last-child { border-bottom: none; }
+    .admin-project-list span {
+      flex: 1 1 0;
+      min-width: 0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .admin-project-list button {
+      margin-left: .2em;
+      background: #28354d;
+      color: #2b72ea;
+      border: 1.3px solid #2b72ea44;
+      border-radius: 6px;
+      padding: 0.32em 0.7em;
+      font-size: 1.09em;
+      box-shadow: 0 1px 6px #2b72ea22;
+      transition: background .17s, color .14s, box-shadow .17s;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .admin-project-list button:hover { background: #2b72ea; color: #fff; }
+    .admin-modal .admin-img-preview-area {
+      display: block;
+      width: 100%;
+      margin-bottom: 1em;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #181e2f;
+      box-shadow: 0 2px 10px #2b72ea33;
+      aspect-ratio: 16/9;
+      min-height: 0;
+      max-width: 100%;
+      text-align: center;
+    }
+    .admin-modal #admin-embed-preview {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center;
-      border: none;
-      display: block;
+      min-height: 100px;
+      border-radius: 12px;
       background: #181e2f;
-      border-radius: 28px;
-    }
-    .portfolio-modal-title {
-      font-size: 1.34rem;
-      font-family: 'Montserrat',sans-serif;
-      font-weight: 700;
-      color: #2b72ea;
-      margin-bottom: 0.25em;
-      text-align: left;
-      width: 100%;
-      max-width: 1000px;
-    }
-    .portfolio-modal-tags {
-      margin-bottom: 0.5em;
-      width: 100%;
-      max-width: 1000px;
-      text-align: left;
-    }
-    .portfolio-modal-desc {
-      font-size: 1.10rem;
-      color: #e2e9ff;
-      line-height: 1.68;
-      margin-bottom: 0.7em;
-      width: 100%;
-      max-width: 1000px;
-      text-align: left;
-    }
-    .portfolio-modal-links {
-      display: flex;
-      gap: 1.13em;
-      margin-top: 0.7em;
-      flex-wrap: wrap;
-      width: 100%;
-      max-width: 1000px;
-      text-align: left;
-    }
-    .portfolio-modal-links a {
-      color: #fff;
-      text-decoration: none;
-      background: #2b72ea;
-      padding: 0.39rem 1em;
-      border-radius: 7px;
-      font-size: 1.01rem;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
+      overflow: hidden;
       display: flex;
       align-items: center;
-      gap:0.48em;
-      transition: background 0.18s, color 0.14s;
+      justify-content: center;
     }
-    .portfolio-modal-links a.github {
-      background: #232b4a;
-      color: #2b72ea;
+    .pw-modal {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1em;
+      width: 100%;
     }
-    .portfolio-modal-links a:hover, .portfolio-modal-links a.github:hover {
-      background: #fff;
-      color: #2b72ea;
+    .pw-modal input[type="password"] {
+      font-size: 1.1em;
+      padding: 0.6em;
+      border-radius: 8px;
+      border: 1.5px solid #2b72ea88;
+      background: #28354d;
+      color: #fff;
+      margin-top: .3em;
+      width: 100%;
+      margin-bottom: .5em;
     }
-    .copyright-label {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      z-index: 110;
-      color: #b3b3c6;
-      font-size: 0.98rem;
-      background: rgba(22,27,41,0.85);
-      padding: 8px 18px 10px 24px;
-      border-top-left-radius: 12px;
-      box-shadow: 0 0 10px #0007;
-      letter-spacing: 0.02em;
-      user-select: none;
-      pointer-events: none;
+    .pw-modal input[type="password"]:focus {
+      border-color: #2b72ea;
+      background: #31416a;
+      outline: none;
+    }
+    @media (max-width: 800px) {
+      .admin-modal { max-width: 99vw; min-width: 0; padding: 1.3rem .2rem 1.3rem .2rem;}
+    }
+    @media (max-width: 600px) {
+      .admin-modal { max-width: 100vw; min-width: 0; padding: .7rem .1rem 1rem .1rem;}
+      .admin-section {padding: .7em .1em;}
+      .admin-modal .admin-img-preview-area { min-height: 70px; aspect-ratio: 16/9;}
     }
   </style>
 </head>
@@ -698,7 +550,7 @@
               <button class="close-modal" title="Close">&times;</button>
               <h2>Manage Portfolio Projects</h2>
               <ul class="admin-project-list">${projectsList}</ul>
-              <button id="add-project">Add Project</button>
+              <div class="admin-btn-row"><button id="add-project">Add Project</button></div>
             `, 'admin');
             adminModal.querySelector('.close-modal').onclick = closeModal;
             adminModal.querySelectorAll('.admin-delete').forEach(btn => {
@@ -730,28 +582,23 @@
             let langFields = '';
             ["en", "pl", "es", "ua"].forEach(l => {
               const label = `<span class="admin-lang-label">${langNames[l]}</span>`;
-              langFields += `<div style="display:flex;gap:1em;align-items:flex-start;">
-                <div style="flex:1 1 0;">
-                  ${label}
-                  <input type="text" placeholder="Title" data-field="title_${l}" value="${proj["title_"+l]||""}">
-                  <textarea placeholder="Short Description" data-field="shortDesc_${l}">${proj["shortDesc_"+l]||""}</textarea>
-                  <textarea placeholder="Full Description" data-field="fullDesc_${l}">${proj["fullDesc_"+l]||""}</textarea>
-                </div>
+              langFields += `<div>
+                ${label}
+                <input type="text" placeholder="Title" data-field="title_${l}" value="${proj["title_"+l]||""}">
+                <textarea placeholder="Short Description" data-field="shortDesc_${l}">${proj["shortDesc_"+l]||""}</textarea>
+                <textarea placeholder="Full Description" data-field="fullDesc_${l}">${proj["fullDesc_"+l]||""}</textarea>
               </div>`;
             });
             showModal(`
               <button class="close-modal" title="Close">&times;</button>
               <h2>${isEdit ? "Edit Project" : "Add Project"}</h2>
               <div class="admin-section">
+                <label>Image or Embed Preview</label>
+                <div class="admin-img-preview-area"><div id="admin-embed-preview"></div></div>
                 <label>Project Image or Embed Link
                   <span style="font-weight:400;color:#aac">(<b>Image URL</b> or <b>YouTube/Figma/CodePen</b> etc. link)</span>
                 </label>
-                <div style="display:flex;align-items:center;gap:1rem;">
-                  <div class="portfolio-card-media" style="width:140px;aspect-ratio:16/9;">
-                    <div id="admin-embed-preview"></div>
-                  </div>
-                  <input type="text" id="img-url-input" placeholder="Paste image or embed URL" value="${proj.imageUrl||""}" style="width:300px;">
-                </div>
+                <input type="text" id="img-url-input" placeholder="Paste image or embed URL" value="${proj.imageUrl||""}">
               </div>
               <div class="admin-section">
                 <label>Multi-Language Fields</label>
@@ -772,7 +619,7 @@
             `, 'admin');
             function updateEmbedPreview(url) {
               document.getElementById('admin-embed-preview').innerHTML =
-                (isEmbeddable(url) ? getEmbedHTML(url, 90) : `<img src="${url||'https://placehold.co/400x300?text=No+Image'}" style="width:100%;height:100%;object-fit:cover;border-radius:18px;background:#181e2f;"/>`);
+                (isEmbeddable(url) ? getEmbedHTML(url, 110) : `<img src="${url||'https://placehold.co/400x300?text=No+Image'}" style="max-width:100%;max-height:100%;object-fit:cover;border-radius:12px;background:#181e2f;"/>`);
             }
             updateEmbedPreview(proj.imageUrl||"");
             adminModal.querySelector('.close-modal').onclick = () => renderAdminPanel();
