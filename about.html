@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>About – Karissa</title>
+  <meta name="description" content="About Karissa. Modern, creative, and responsive web design services.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin:0; padding:0; min-height:100vh; background:#1a2333;}
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      background: #1a2333;
+    }
+    .paint-bg-img {
+      position: fixed;
+      z-index: 0;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #1a2333 url('https://i.ibb.co/BVpk0KMn/pngtree-abstract-wallpaper-background-made-of-of-paint-splashes-image-15686388.jpg') no-repeat center center;
+      background-size: cover;
+      filter: blur(0px) brightness(0.65) saturate(1.25);
+      pointer-events: none;
+      transition: filter 0.5s;
+    }
+    .bg-overlay {
+      position: fixed; z-index: 1; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(120deg, rgba(15,22,38,0.72) 55%, rgba(32,40,80,0.28) 100%);
+      pointer-events: none;
+    }
+    nav {
+      z-index: 10;
+      background: rgba(22, 27, 41, 0.93);
+      box-shadow: 0 2px 22px #1117;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5vw 1.1rem 1.5vw;
+      position: sticky;
+      top:0;
+      border-bottom: 2.3px solid #2b72ea;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+    }
+    .brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.45rem;
+      color: #2b72ea;
+      letter-spacing: 1.2px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-left: 2.6rem;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      font-size: 1.11rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 7px;
+      transition: background 0.22s, color 0.17s;
+      position: relative;
+    }
+    .nav-links a.active, .nav-links a:hover {
+      background: #2b72ea;
+      color: #fff;
+    }
+    .nav-admin {
+      background: #232b4a;
+      border-radius: 50%;
+      padding: 0.37rem 0.47rem;
+      margin-left: 1.1rem;
+      color: #2b72ea;
+      font-size: 1.12rem;
+      border: 1.3px solid #2b72ea88;
+      box-shadow: 0 3px 10px #2b72ea33;
+      cursor: pointer;
+      transition: background 0.18s, color 0.14s, box-shadow 0.14s;
+      outline: none;
+    }
+    .nav-admin:hover, .nav-admin:focus {
+      background: #2b72ea;
+      color: #fff;
+      box-shadow: 0 6px 20px #2b72ea44;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 0.2rem;
+      background: #232b4a;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px #2b72ea11;
+      padding: 0.25rem 0.55rem;
+      margin-right: 0.7rem;
+    }
+    .lang-switch button {
+      background: none;
+      border: none;
+      color: #2b72ea;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0.19rem 0.57rem;
+      border-radius: 6px;
+      transition: background 0.17s, color 0.12s;
+    }
+    .lang-switch button.active, .lang-switch button:hover {
+      background: #2b72ea;
+      color: #fff;
+    }
+    @media (max-width: 650px) {
+      nav { flex-direction: column; align-items: flex-start; gap: 0.7rem; }
+      .nav-right { margin-top: 0.6rem; }
+      .nav-links { margin-left: 0.3rem; flex-wrap: wrap; gap: 0.5rem; }
+    }
+    .about-main-content {
+      z-index: 2;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 70vh;
+      padding-top: 6rem;
+      padding-bottom: 3.5rem;
+      justify-content: center;
+    }
+    .profile-wrap {
+      background: rgba(22,27,41,0.90);
+      padding: 2.7rem 2.3rem 2.6rem 2.3rem;
+      border-radius: 22px;
+      box-shadow: 0 6px 48px #000c;
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 3.8rem;
+      position: relative;
+    }
+    .profile-img {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 48px #2b72ea66, 0 2px 14px #000a;
+      border: 6px solid #2b72ea;
+      flex-shrink: 0;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      transition: box-shadow 0.4s, border-color 0.4s;
+    }
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .profile-wrap { flex-direction: column; gap: 2rem; padding: 1.2rem;}
+      .profile-img { width: 170px; height: 170px;}
+    }
+    @media (max-width: 600px) {
+      .profile-img { width: 120px; height: 120px; }
+      .profile-wrap { gap: 1.1rem; }
+    }
+    .profile-text {
+      color: #fff;
+      font-size: 1.18rem;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.68;
+      max-width: 390px;
+      min-width: 0;
+      min-height: 60px;
+      position: relative;
+      transition: opacity 0.55s cubic-bezier(.44,0,.56,1), transform 0.65s cubic-bezier(.44,0,.56,1);
+      opacity: 1;
+      z-index: 2;
+      margin-bottom: 0;
+      margin-top: 0;
+      background: none;
+      will-change: opacity, transform;
+    }
+    .profile-text.fade {
+      opacity: 0;
+      transform: scale(0.96) translateY(36px);
+      pointer-events: none;
+    }
+    .profile-text-controls {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+    .profile-text-btn {
+      background: #2b72ea;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.55rem 1.4rem;
+      box-shadow: 0 3px 12px #2b72ea44;
+      cursor: pointer;
+      transition: background 0.18s, color 0.14s;
+    }
+    .profile-text-btn:disabled {
+      background: #8888;
+      cursor: not-allowed;
+    }
+    .copyright-label {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      z-index: 110;
+      color: #b3b3c6;
+      font-size: 0.98rem;
+      background: rgba(22,27,41,0.85);
+      padding: 8px 18px 10px 24px;
+      border-top-left-radius: 12px;
+      box-shadow: 0 0 10px #0007;
+      letter-spacing: 0.02em;
+      user-select: none;
+      pointer-events: none;
+    }
+    /* Admin Panel Modal */
+    .modal-backdrop {
+      position: fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.65); z-index:9998;
+      display: none; align-items: center; justify-content: center;
+    }
+    .modal-backdrop.active { display: flex; }
+    .admin-modal {
+      background: #202a3d;
+      padding: 2rem 2rem 1.5rem 2rem;
+      border-radius: 22px;
+      box-shadow: 0 8px 48px #000d;
+      min-width: 320px;
+      max-width: 95vw;
+      color: #fff;
+      position: relative;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      animation: fadeInModal 0.6s;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: scale(0.85);}
+      to   { opacity: 1; transform: scale(1);}
+    }
+    .admin-modal h2 { font-family:'Montserrat',sans-serif; font-size:1.3rem; margin-top:0;}
+    .admin-modal label { font-weight:500; margin-bottom:0.25rem; display:block;}
+    .admin-modal input[type="file"] { margin-top:0.4rem;}
+    .admin-modal input[type="text"], .admin-modal textarea, .admin-modal select {
+      width: 100%; border-radius: 7px; border: none; padding:0.6rem 0.8rem; font-size:1rem; margin-bottom:0.7rem;
+      font-family:'Roboto',sans-serif; background:#22304e; color:#fff;
+    }
+    .admin-modal textarea {min-height: 60px;resize:vertical;}
+    .admin-modal .admin-btn-row { display: flex; gap:1rem; margin-top:1rem;}
+    .admin-modal button {
+      font-family:'Montserrat',sans-serif; font-weight:600; font-size:1rem; border-radius:7px; border:none; padding:0.55rem 1.25rem; cursor:pointer;
+      background:#2b72ea; color:#fff; box-shadow:0 2px 8px #2b72ea44; transition:background 0.14s;
+    }
+    .admin-modal button:hover { background:#e5a31a; color:#2b72ea;}
+    .admin-modal .close-modal {
+      background: #232b4a; color: #ccc; padding: 0.33rem 0.9rem; border-radius: 7px; margin-left: auto; margin-bottom: 1rem;
+      font-size:1.2rem; border: none; cursor: pointer;
+      transition: background 0.16s, color 0.12s;
+    }
+    .admin-modal .close-modal:hover { background:#2b72ea; color:#fff;}
+    .admin-modal .admin-section {margin-bottom: 1.4rem;}
+    .admin-modal .admin-section:last-child {margin-bottom: 0;}
+    .admin-modal .pages-list {margin:0.6rem 0 0.4rem 0; padding:0; list-style:none;}
+    .admin-modal .pages-list li {margin-bottom:0.37rem; background:#22304e; border-radius:5px; padding:0.55rem 0.7rem;}
+    .admin-modal .pages-list li span {font-weight:600;}
+    .admin-modal .admin-delete { background:#e23434 !important; color:#fff !important; margin-left:0.7rem;}
+    /* Password Modal */
+    .pw-modal { display:flex; flex-direction:column; align-items:center;}
+    .pw-modal input[type="password"] {
+      width: 200px; border-radius: 7px; border:none; padding:0.55rem 0.8rem; font-size:1rem; margin:1.1rem 0 0.7rem 0;
+      font-family:'Roboto',sans-serif; background:#22304e; color:#fff;
+    }
+    .pw-modal .admin-btn-row {margin-top: 0;}
+    .admin-lang-label {
+      display: inline-block;
+      font-size: 1.06em;
+      font-weight: 600;
+      background: #233059;
+      color: #fff;
+      border-radius: 7px;
+      padding: 0.18em 0.75em;
+      margin-right: 0.5em;
+      margin-bottom: 0.4em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Paint splash image background -->
+  <div class="paint-bg-img"></div>
+  <div class="bg-overlay"></div>
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      <span class="brand"><i class="fa-solid fa-brush"></i> Karissa</span>
+      <div class="nav-links">
+        <a href="index.html" data-i18n="nav_home">Home</a>
+        <a href="about.html" class="active" data-i18n="nav_about">About Me</a>
+        <a href="portfolio.html" data-i18n="nav_portfolio">Portfolio</a>
+        <a href="contact.html" data-i18n="nav_contact">Contact</a>
+        <button class="nav-admin" id="admin-cog" title="Admin"><i class="fa fa-cog"></i></button>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="pl">PL</button>
+        <button data-lang="es">ES</button>
+        <button data-lang="ua">UA</button>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <div class="about-main-content">
+    <div class="profile-wrap">
+      <div class="profile-img" id="profile-img">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHeZjFI86VtFA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1711586425930?e=1755734400&v=beta&t=uG6ZrOJIhmHS_qrJF5S9xmrLFmxt1w8382hj23Iz1C8" id="profileImgTag" alt="Karissa Profile" />
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;">
+        <p class="profile-text" id="profile-text"></p>
+        <div class="profile-text-controls">
+          <button class="profile-text-btn" id="prev-para">&larr; Previous</button>
+          <button class="profile-text-btn" id="next-para">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copyright-label">© Hultgka 2025</div>
+  <!-- Admin Modal (+Password Modal) -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="admin-modal" id="admin-modal" style="display:none"></div>
+  </div>
+  <!-- Firebase & Main Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+    import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js";
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // ---- Declarations first ----
+      let currentLang = "en";
+      let currPara = 0;
+      let profileData = {
+        imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQHeZjFI86VtFA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1711586425930?e=1755734400&v=beta&t=uG6ZrOJIhmHS_qrJF5S9xmrLFmxt1w8382hj23Iz1C8",
+        paragraphs_en: [
+          "Welcome to my about page! I'm Karissa, a passionate web designer who loves blending code and creativity.",
+          "I believe every website should not just look amazing but also feel magical to use.",
+          "If you want a digital presence that's vibrant and unforgettable, let's connect!"
+        ]
+      };
+
+      // ---- Firebase ----
+      const firebaseConfig = {
+        apiKey: "AIzaSyApVAxEf3Tj5hUvbI4USmg23RkP0gldj_I",
+        authDomain: "karissa-s-portfolio.firebaseapp.com",
+        projectId: "karissa-s-portfolio",
+        storageBucket: "karissa-s-portfolio.appspot.com",
+        messagingSenderId: "91280590936",
+        appId: "1:91280590936:web:13b904b7843a97e221622d"
+      };
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const storage = getStorage(app);
+
+      // ---- DOM elements ----
+      const profileImgTag = document.getElementById('profileImgTag');
+      const profileText = document.getElementById('profile-text');
+      const prevParaBtn = document.getElementById('prev-para');
+      const nextParaBtn = document.getElementById('next-para');
+      const modalBackdrop = document.getElementById('modal-backdrop');
+      const adminModal = document.getElementById('admin-modal');
+
+      // ---- Language Support ----
+      const translations = {
+        en: {
+          nav_home: "Home",
+          nav_about: "About Me",
+          nav_portfolio: "Portfolio",
+          nav_contact: "Contact"
+        },
+        pl: {
+          nav_home: "Start",
+          nav_about: "O mnie",
+          nav_portfolio: "Portfolio",
+          nav_contact: "Kontakt"
+        },
+        es: {
+          nav_home: "Inicio",
+          nav_about: "Sobre mí",
+          nav_portfolio: "Portafolio",
+          nav_contact: "Contacto"
+        },
+        ua: {
+          nav_home: "Головна",
+          nav_about: "Про мене",
+          nav_portfolio: "Портфоліо",
+          nav_contact: "Контакт"
+        }
+      };
+
+      function getCurrentParagraphs() {
+        return profileData["paragraphs_"+currentLang] || profileData["paragraphs_en"];
+      }
+      function showPara(idx, instant=false) {
+        const paras = getCurrentParagraphs();
+        currPara = idx;
+        if (currPara < 0) currPara = 0;
+        if (currPara >= paras.length) currPara = paras.length-1;
+        if (instant) {
+          profileText.classList.remove('fade');
+          profileText.textContent = paras[currPara] || "";
+        } else {
+          profileText.classList.add('fade');
+          setTimeout(()=>{
+            profileText.textContent = paras[currPara] || "";
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                profileText.classList.remove('fade');
+              });
+            });
+          }, 270);
+        }
+        prevParaBtn.disabled = (currPara === 0);
+        nextParaBtn.disabled = (currPara === paras.length-1);
+      }
+      function setLang(lang) {
+        currentLang = lang;
+        document.querySelectorAll("[data-i18n]").forEach(el => {
+          const key = el.getAttribute("data-i18n");
+          let val = translations[lang][key];
+          if (val) el.textContent = val;
+        });
+        document.querySelectorAll(".lang-switch button").forEach(btn=>{
+          btn.classList.toggle("active", btn.getAttribute("data-lang")===lang);
+        });
+        showPara(0, true);
+      }
+
+      // ---- Event handlers ----
+      document.querySelectorAll(".lang-switch button").forEach(btn=>{
+        btn.onclick = ()=>setLang(btn.getAttribute("data-lang"));
+      });
+      prevParaBtn.onclick = ()=>showPara(currPara-1);
+      nextParaBtn.onclick = ()=>showPara(currPara+1);
+
+      // ---- Modal Logic ----
+      function showModal(html) {
+        adminModal.innerHTML = html;
+        modalBackdrop.classList.add('active');
+        adminModal.style.display = '';
+      }
+      function closeModal() {
+        modalBackdrop.classList.remove('active');
+        setTimeout(()=>{ adminModal.style.display = 'none'; }, 300);
+      }
+      modalBackdrop.onclick = function(e) {
+        if (e.target === modalBackdrop) closeModal();
+      };
+
+      // ---- Admin Panel ----
+      document.getElementById('admin-cog').onclick = function() {
+        showModal(`
+          <div class="pw-modal">
+            <h2>Admin Access</h2>
+            <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password"/>
+            <div class="admin-btn-row">
+              <button id="pw-submit">Enter</button>
+              <button class="close-modal">Close</button>
+            </div>
+            <div id="pw-error" style="color:#e23434; margin-top:0.7rem;"></div>
+          </div>
+        `);
+        adminModal.querySelector('.close-modal').onclick = closeModal;
+        adminModal.querySelector('#pw-submit').onclick = function() {
+          const pw = adminModal.querySelector('#pw-input').value;
+          if (pw === "BultgrenA!") {
+            showAdminPanel();
+          } else {
+            adminModal.querySelector('#pw-error').textContent = "Incorrect password.";
+          }
+        }
+        adminModal.querySelector('#pw-input').onkeydown = function(e) {
+          if (e.key === 'Enter') adminModal.querySelector('#pw-submit').click();
+        }
+        setTimeout(()=>adminModal.querySelector('#pw-input').focus(),100);
+      };
+
+      // Helper for language names
+      const langNames = { en: "English", pl: "Polish", es: "Spanish", ua: "Ukrainian" };
+
+      async function showAdminPanel() {
+        let profDoc = await getDoc(doc(db, "profilePage", "main"));
+        if (profDoc.exists()) profileData = profDoc.data();
+
+        function renderAdminPanel() {
+          // Multi-language paragraphs side-by-side
+          let maxParas = 0;
+          ["en", "pl", "es", "ua"].forEach(l => {
+            const arr = profileData["paragraphs_" + l] || [];
+            if (arr.length > maxParas) maxParas = arr.length;
+          });
+
+          // Build UI: show all languages, each row is a paragraph slot
+          let parasTable = "";
+          for (let i = 0; i < maxParas; ++i) {
+            parasTable += `<div style="margin-bottom:0.7em;display:flex;gap:0.5em;align-items:flex-start;">`;
+            ["en", "pl", "es", "ua"].forEach(l => {
+              const val = (profileData["paragraphs_" + l] || [])[i] || "";
+              const label = `<span class="admin-lang-label">${langNames[l]}</span>`;
+              parasTable += `<div style="flex:1 1 0;">
+                ${i==0?label:""}
+                <textarea style="width:100%;min-width:110px;" data-lang="${l}" data-idx="${i}" placeholder="Paragraph ${i+1} in ${langNames[l]}">${val}</textarea>
+              </div>`;
+            });
+            if (maxParas > 1) {
+              parasTable += `<button class="admin-delete" data-idx="${i}" title="Delete paragraph row">🗑</button>`;
+            }
+            parasTable += `</div>`;
+          }
+
+          showModal(`
+            <button class="close-modal" title="Close">&times;</button>
+            <h2>Edit About Page</h2>
+            <div class="admin-section">
+              <label>Profile Image</label>
+              <div style="display:flex;align-items:center;gap:1rem;">
+                <div class="profile-img" style="width:130px;height:130px;">
+                  <img src="${profileData.imageUrl}" id="admin-profile-img" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/>
+                </div>
+                <input type="file" id="img-upload" accept="image/*"/>
+              </div>
+            </div>
+            <div class="admin-section">
+              <label>About Text Paragraphs in All Supported Languages</label>
+              <div id="admin-paras-table">${parasTable}</div>
+              <button id="add-para">Add Paragraph</button>
+              <button id="admin-translate" title="Auto-translate empty fields from English">Auto-translate Empty Fields</button>
+              <div style="color:#bbb;font-size:0.97em;margin-top:0.25em;">
+                <b>Tip:</b> Each row is a paragraph slot. You can fill in translations for the same paragraph across all languages in the same row.
+              </div>
+            </div>
+            <div class="admin-btn-row">
+              <button id="save-admin">Save Changes</button>
+            </div>
+          `);
+
+          adminModal.querySelector('.close-modal').onclick = closeModal;
+
+          // Paragraphs textarea logic
+          const updateDataFromUI = () => {
+            ["en", "pl", "es", "ua"].forEach(lang => {
+              profileData["paragraphs_" + lang] = [];
+            });
+            adminModal.querySelectorAll('textarea[data-lang]').forEach(t => {
+              const lang = t.getAttribute("data-lang");
+              const idx = parseInt(t.getAttribute("data-idx"));
+              if (!profileData["paragraphs_" + lang]) profileData["paragraphs_" + lang] = [];
+              profileData["paragraphs_" + lang][idx] = t.value;
+            });
+            // Remove trailing empty paragraphs
+            ["en", "pl", "es", "ua"].forEach(lang => {
+              let arr = profileData["paragraphs_" + lang];
+              while (arr && arr.length && !arr[arr.length-1]) arr.pop();
+            });
+          };
+
+          adminModal.querySelectorAll('textarea[data-lang]').forEach(t => {
+            t.oninput = updateDataFromUI;
+          });
+
+          // Delete paragraph row
+          adminModal.querySelectorAll('.admin-delete').forEach(btn => {
+            btn.onclick = () => {
+              const idx = parseInt(btn.getAttribute('data-idx'));
+              ["en", "pl", "es", "ua"].forEach(lang => {
+                if (profileData["paragraphs_" + lang]) profileData["paragraphs_" + lang].splice(idx, 1);
+              });
+              renderAdminPanel();
+            }
+          });
+
+          // Add paragraph row
+          adminModal.querySelector('#add-para').onclick = () => {
+            ["en", "pl", "es", "ua"].forEach(lang => {
+              if (!profileData["paragraphs_" + lang]) profileData["paragraphs_" + lang] = [];
+              profileData["paragraphs_" + lang].push("");
+            });
+            renderAdminPanel();
+          };
+
+          // Auto-translate empty paragraphs
+          adminModal.querySelector('#admin-translate').onclick = async () => {
+            // Only fill empty slots (do not overwrite existing translations)
+            let en = profileData["paragraphs_en"] || [];
+            for (let i = 0; i < en.length; ++i) {
+              ["pl","es","ua"].forEach(async lang => {
+                let arr = profileData["paragraphs_" + lang];
+                if (!arr) arr = profileData["paragraphs_" + lang] = [];
+                if (!arr[i] || !arr[i].trim()) {
+                  let p = en[i];
+                  let resp = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${lang}&dt=t&q=`+encodeURIComponent(p));
+                  let json = await resp.json();
+                  arr[i] = json[0].map(a=>a[0]).join("");
+                  renderAdminPanel();
+                }
+              });
+            }
+          };
+
+          // Image upload
+          adminModal.querySelector('#img-upload').onchange = async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const fileRef = sRef(storage, `profileImages/${file.name}`);
+            await uploadBytes(fileRef, file);
+            const url = await getDownloadURL(fileRef);
+            profileData.imageUrl = url;
+            adminModal.querySelector('#admin-profile-img').src = url;
+          };
+
+          // Save
+          adminModal.querySelector('#save-admin').onclick = async function() {
+            updateDataFromUI();
+            await setDoc(doc(db,"profilePage","main"), {
+              imageUrl: profileData.imageUrl,
+              paragraphs_en: profileData.paragraphs_en || [],
+              paragraphs_pl: profileData.paragraphs_pl || [],
+              paragraphs_es: profileData.paragraphs_es || [],
+              paragraphs_ua: profileData.paragraphs_ua || [],
+              adminSecret: "BultgrenA!"
+            });
+            closeModal();
+            await loadProfileData();
+          };
+        }
+        renderAdminPanel();
+      }
+
+      // ---- Load Profile Data and Start ----
+      async function loadProfileData() {
+        const docRef = doc(db, "profilePage", "main");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data.imageUrl) profileData.imageUrl = data.imageUrl;
+          ["en","pl","es","ua"].forEach(l=>{
+            if (Array.isArray(data["paragraphs_"+l])) profileData["paragraphs_"+l] = data["paragraphs_"+l];
+          });
+        }
+        profileImgTag.src = profileData.imageUrl;
+        setLang(currentLang);
+      }
+      loadProfileData();
+
+    });
+  </script>
+</body>
+</html>
